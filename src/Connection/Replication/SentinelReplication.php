@@ -269,8 +269,9 @@ class SentinelReplication implements ReplicationInterface
             // sentinels starting with Redis 5 but we have to differentiate from
             // sentinels passwords and nodes passwords, this will be implemented
             // in a later release.
-            $parameters['database'] = null;
-            $parameters['username'] = null;
+            $parameters['database'] = null;            
+            // Do not reset username if it was provided
+            $parameters['username'] ??= null;
 
             // don't leak password from between configurations
             // https://github.com/predis/predis/pull/807/#discussion_r985764770
