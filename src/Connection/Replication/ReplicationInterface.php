@@ -51,3 +51,10 @@ interface ReplicationInterface extends AggregateConnectionInterface
      */
     public function getSlaves();
 }
+
+// Add support for an old Predis 1.* interface
+// This is to solve an issue in the Symfony RedisAdapter since it isn't updated yet for Predis ^2.*
+// See https://github.com/symfony/symfony/issues/49238
+if (!class_exists('Predis\Connection\Aggregate\ReplicationInterface')) {
+    \class_alias(ReplicationInterface::class, 'Predis\Connection\Aggregate\ReplicationInterface');
+}
