@@ -224,6 +224,16 @@ class Client implements ClientInterface, IteratorAggregate
     }
 
     /**
+     * Add back support for old Predis 1.* method.
+     * This is to solve an issue in the Symfony RedisAdapter since it isn't updated yet for Predis ^2.*
+     * See https://github.com/symfony/symfony/issues/49238
+     */
+    public function getClientFor(string $role): ClientInterface
+    {
+        return $this->getClientBy('role', $role);
+    }
+
+    /**
      * Opens the underlying connection and connects to the server.
      */
     public function connect()
